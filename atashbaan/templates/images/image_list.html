@@ -1,0 +1,113 @@
+{% extends "account/base.html" %}
+
+{% block head_title %}
+    فهرست تصاویر
+{% endblock head_title %}
+
+{% block inner %}
+    <div class="row justify-content-md-center">
+        <h1 class="text-center">فهرست تصاویر 
+            <a id="header-link" href="{% url "users:detail" user.username %}">
+                {{ user.name }}
+            </a>
+        </h1>
+    </div>
+    <div class="rounded border border-4 border-success my-3">
+        <div class="row justify-content-md-center">
+            <div class="col-md-auto px-5 py-5">
+                <div class="row justify-content-md-center">
+                    {% for image in images %}
+                        <div class="col-sm-2 py-4">
+                            <div class="card text-center">
+                                <img
+                                src="{{ image.image.url }}"
+                                class="card-img-top"
+                                alt="{{ image.image.name }}"
+                                />
+                                <div class="card-body">
+                                    <h5 class="card-title"><span class="badge rounded-pill text-bg-success">{{ image.get_tag_display }}</span></h5>
+                                    <p class="card-text"></p>
+                                    <a href="{% url "images:image_detail" image.pk %}" class="btn btn-primary">جزئیات</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                {% if is_paginated %}
+                    <div class="row justify-content-md-center">
+                        <div class="d-flex justify-content-center my-4">
+                            <div class="btn-group" role="group" aria-label="pagination">
+                                {% if page_obj.has_previous %}
+                                    <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-outline-dark rounded">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+                                        </svg>
+                                    </a>
+                                {% endif %}
+                                <a href="!#" class="btn btn-outline-dark rounded mx-2">
+                                    {{ page_obj.number }}
+                                </a>
+                                {% if page_obj.has_next %}
+                                    <a href="?page={{ page_obj.next_page_number }}" class="btn btn-outline-dark rounded">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+                                        </svg>
+                                    </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="rounded border border-4 border-danger my-3">
+        <div class="row justify-content-md-center">
+            <div class="col-md-auto px-5 py-5">
+                <div class="row justify-content-md-center">
+                    {% for image in unprocessed_images %}
+                        <div class="col-sm-2 py-4">
+                            <div class="card text-center">
+                                <img
+                                src="{{ image.image.url }}"
+                                class="card-img-top"
+                                alt="{{ image.image.name }}"
+                                />
+                                <div class="card-body">
+                                    <h5 class="card-title"><span class="badge rounded-pill text-bg-warning">{{ image.get_tag_display }}</span></h5>
+                                    <p class="card-text"></p>
+                                    <a href="{% url "images:image_detail" image.pk %}" class="btn btn-primary">جزئیات</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                {% if unprocessed_is_paginated %}
+                    <div class="row justify-content-md-center">
+                        <div class="d-flex justify-content-center my-4">
+                            <div class="btn-group" role="group" aria-label="pagination">
+                                {% if unprocessed_page_obj.has_previous %}
+                                    <a href="?unprocessed-image-page={{ unprocessed_page_obj.previous_page_number }}" class="btn btn-circle btn-outline-dark rounded">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+                                        </svg>
+                                    </a>
+                                {% endif %}
+                                <a href="#!" class="btn btn-outline-dark rounded mx-2">
+                                    {{ unprocessed_page_obj.number }}
+                                </a>
+                                {% if unprocessed_page_obj.has_next %}
+                                    <a href="?unprocessed-image-page={{ unprocessed_page_obj.next_page_number }}" class="btn btn-outline-dark rounded">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+                                        </svg>
+                                    </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock inner %}

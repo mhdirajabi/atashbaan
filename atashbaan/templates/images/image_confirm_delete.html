@@ -1,0 +1,23 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}
+    تأیید حذف تصویر
+{% endblock head_title %}
+
+{% block inner %}
+  <div class="row justify-content-md-center">
+    <h1 class="text-center">تأیید حذف تصویر</h1>
+  </div>
+  <div class="row justify-content-md-center mt-3">
+    <p class="text-center">آیا از حذف این تصویر اطمینان دارید؟</p>
+  </div>
+  <div class="row justify-content-md-center mt-3">
+    <form class="text-center" method="post">
+      {% csrf_token %}
+      <button class="btn btn-danger w-100" type="submit">بله</button>
+      <a class="btn btn-secondary w-100 my-3" href="{% url "images:image_detail" image.pk %}">بازگشت</a>
+    </form>
+  </div>
+{% endblock inner %}

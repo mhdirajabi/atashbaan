@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}صفحه مورد نظر پیدا نشد{% endblock title %}
+
+{% block content %}
+  <div class="container my-5">
+    <div class="row justify-content-md-center">
+      <h1>متأسفانه صفحه مورد نظر پیدا نشد.</h1>
+    </div>
+    <div class="row justify-content-md-center mt-3">
+      <p class="text-center">
+        {% if exception %}
+          {{ exception }}
+        {% else %}
+          این صفحه ای نیست که شما به دنبال آن بودید.
+        {% endif %}
+      </p>
+    </div>
+  </div>
+{% endblock content %}

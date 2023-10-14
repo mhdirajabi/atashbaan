@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}
+  مشخصات کاربر | {{ user.username }}
+{% endblock title %}
+
+{% block content %}
+  <div class="container my-5">
+    <div class="row justify-content-md-center">
+      <h1 class="text-center">
+        {{ user.username }}
+      </h1>
+    </div>
+    <div class="row justify-content-md-center mt-3">
+      <div class="col-md-auto">
+        <form class="form-horizontal"
+            method="post"
+            action="{% url 'users:update' %}">
+          {% csrf_token %}
+          {{ form|crispy }}
+          <div class="control-group text-center py-2">
+            <div class="controls">
+              <button type="submit" class="btn btn-primary">بروزرسانی</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

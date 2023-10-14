@@ -1,0 +1,68 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}
+    جزئیات
+{% endblock head_title %}
+
+{% block inner %}
+    <div class="row justify-content-md-center mt-3">
+        <div class="col-md-3">
+            <div class="row justify-content-md-center mt-3">
+                <div class="col-md-auto">
+                    <h3 class="text-center">
+                        اطلاعات تصویر:
+                    </h3>
+                </div>
+            </div>
+            <div class="row justify-content-md-center mt-3">
+                <div class="col-md-auto">
+                    <p class="text-center">
+                        <strong id="strong-text">تاریخ ایجاد:</strong> {{ image.created_at }}
+                    </p>
+                </div>
+            </div>
+            <div class="row justify-content-md-center mt-3">
+                <div class="col-md-auto">
+                    <p class="text-center">
+                        <strong id="strong-text">تگ:</strong> {{ image.get_tag_display }}
+                    </p>
+                </div>
+            </div>
+            {% if image.tag == "unprocessed" %}
+            <div class="row justify-content-md-center mt-3">
+                <div class="col-md-auto">
+                    <form action="{% url "images:image_process" %}">
+                        <input type="hidden" name="image-pk" value="{{ image.pk }}">
+                        <button class="btn btn-success" type="submit">
+                            پردازش
+                        </button>
+                    </form>
+                </div>
+            </div>
+            {% endif %}
+            <div class="row justify-content-md-center mt-3">
+                <div class="col-md-auto">
+                    <a class="btn btn-danger" href="{% url "images:image_delete" image.pk %}">
+                        حذف
+                    </a>
+                </div>
+            </div>
+            <div class="row justify-content-md-center mt-3">
+                <div class="col-md-auto">
+                    <a class="btn btn-primary" href="{% url "images:image_list" %}">
+                        بازگشت به فهرست
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="row justify-content-md-center mt-3">
+                <div class="col-md-auto text-center">
+                    <img class="rounded" src="{{ image.image.url }}" alt="image-{{ image.pk }}" style="max-width: 100%; height: auto;">
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock inner %}

@@ -1,0 +1,102 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+
+{% load crispy_forms_tags %}
+
+{% block head_title %}
+  حساب کاربری
+{% endblock head_title %}
+
+{% block inner %}
+  <div class="row justify-content-md-center">
+    <h1 class="text-center">نشانی‌های رایانامه</h1>
+  </div>
+  {% if user.emailaddress_set.all %}
+    <div class="row justify-content-md-center mt-3">
+      <div class="col-md-auto">
+        <p clas="text-sm-center">نشانی‌های رایانامه‌ای که به حساب‌ کاربری متصل شده‌اند:</p>
+      </div>
+      <div class="col-md-auto">
+        <form action="{% url 'account_email' %}" class="email_list text-center" method="post">
+          {% csrf_token %}
+          <fieldset class="blockLabels">
+            <div class="row justify-content-md-center">
+              {% for emailaddress in user.emailaddress_set.all %}
+                <label for="email_radio_{{ forloop.counter }}"
+                      class="mb-2 {% if emailaddress.primary %}primary_email{% endif %}">
+                  <input id="email_radio_{{ forloop.counter }}"
+                        type="radio"
+                        name="email"
+                        {% if emailaddress.primary or user.emailaddress_set.count == 1 %}
+                        checked="checked"
+                        {% endif %}
+                        value="{{ emailaddress.email }}"/>
+                  {{ emailaddress.email }}
+                  {% if emailaddress.verified %}
+                    <span class="text-success mx-2 verified">{% translate "Verified" %}</span>
+                  {% else %}
+                    <span class="text-warning mx-2 unverified">{% translate "Unverified" %}</span>
+                  {% endif %}
+                  {% if emailaddress.primary %}
+                    <span class="text-primary primary">{% translate "Primary" %}</span>
+                  {% endif %}
+                </label>
+              {% endfor %}
+            </div>
+            <div class="row justify-content-md-center mt-3">
+              <div class="form-group">
+                <button class="secondaryAction btn btn-sm btn-outline-primary"
+                        type="submit"
+                        name="action_primary">{% translate "Make Primary" %}</button>
+                <button class="secondaryAction btn btn-sm btn-outline-secondary mx-3"
+                        type="submit"
+                        name="action_send">{% translate "Re-send Verification" %}</button>
+                <button class="primaryAction btn btn-sm btn-outline-danger"
+                        type="submit"
+                        name="action_remove">{% translate "Remove" %}</button>
+              </div>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  {% else %}
+    <div class="row justify-content-md-center mt-3">
+      <p class="text-center">
+        <strong>{% translate "Warning:" %}</strong> {% translate "You currently do not have any e-mail address set up. You should really add an e-mail address so you can receive notifications, reset your password, etc." %}
+      </p>
+    </div>
+  {% endif %}
+  <div class="row justify-content-md-center mt-5">
+    <h2 class="text-center">{% translate "Add E-mail Address" %}</h2>
+  </div>
+  <div class="row justify-content-md-center mt-3">
+    <div class="col-md-auto">
+      <form method="post" action="{% url 'account_email' %}" class="add_email">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <div class="mb-3">
+          <button class="btn btn-primary w-100" name="action_add" type="submit">{% translate "Add E-mail" %}</button>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock inner %}
+{% block inline_javascript %}
+  {{ block.super }}
+  <script type="text/javascript">
+    window.addEventListener('DOMContentLoaded', function() {
+      const message = "{% translate 'Do you really want to remove the selected e-mail address?' %}";
+      const actions = document.getElementsByName('action_remove');
+      if (actions.length) {
+        actions[0].addEventListener("click", function(e) {
+          if (!confirm(message)) {
+            e.preventDefault();
+          }
+        });
+      }
+      Array.from(document.getElementsByClassName('form-group')).forEach(x => x.classList.remove('row'));
+    });
+  </script>
+{% endblock inline_javascript %}

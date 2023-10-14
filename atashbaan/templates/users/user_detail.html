@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+  حساب کاربری | {{ object.username }}
+{% endblock title %}
+
+{% block content %}
+  <div class="container my-5">
+    <div class="row justify-content-md-center">
+      <div class="col-md-auto">
+        <h2 class="text-center">
+          نام کاربری: {{ object.username }}
+        </h2>
+        {% if object.name %}
+          <p class="text-center pt-2">نام و نام خانوادگی کاربر: {{ object.name }}</p>
+        {% endif %}
+      </div>
+    </div>
+    {% if object == request.user %}
+      <!-- Action buttons -->
+        <div class="row justify-content-md-center mt-3">
+          <div class="col-md-auto">
+            <div class="row justify-content-md-center">
+              <a class="btn btn-primary" 
+                href="{% url 'users:update' %}" 
+                role="button">مشخصات کاربر
+              </a>
+            </div>
+            <div class="row justify-content-md-center mt-3">
+              <a class="btn btn-primary"
+                href="{% url 'account_email' %}"
+                role="button">رایانامه ها
+              </a>
+            </div>
+            <!-- Your Stuff: Custom user template urls -->
+            <div class="row justify-content-md-center mt-3">
+              <a class="btn btn-primary" 
+                href="{% url 'images:image_list' %}" 
+                role="button">فهرست تصاویر
+              </a>
+            </div>
+            <div class="row justify-content-md-center mt-3">
+              <a class="btn btn-primary" 
+                href="{% url 'images:image_upload' %}" 
+                role="button">بارگذاری تصویر
+              </a>
+            </div>
+          </div>
+        </div>
+      <!-- End Action buttons -->
+    {% endif %}
+  </div>
+{% endblock content %}

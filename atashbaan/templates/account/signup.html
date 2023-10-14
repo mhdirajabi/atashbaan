@@ -1,0 +1,38 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block head_title %}
+  ثبت نام در آتش بان
+{% endblock head_title %}
+
+{% block inner %}
+  <div class="row justify-content-md-center">
+    <h1 class="text-center">ساخت حساب جدید</h1>
+  </div>
+  <div class="row justify-content-md-center mt-3">
+    <div class="col-md-auto">
+      <form class="signup"
+            id="signup_form"
+            method="post"
+            action="{% url 'account_signup' %}">
+        {% csrf_token %}
+        {{ form|crispy }}
+        {% if redirect_field_value %}
+          <input type="hidden"
+                name="{{ redirect_field_name }}"
+                value="{{ redirect_field_value }}" />
+        {% endif %}
+        <div class="mb-3">
+          <button class="btn btn-primary w-100" type="submit">{% translate "Sign Up" %}</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="row justify-content-md-center mt-3">
+    <p class="lead text-center">
+      قبلاً ثبت نام کرده‌اید؟ <a href="{{ login_url }}">وارد</a> شوید.
+    </p>
+  </div>
+{% endblock inner %}

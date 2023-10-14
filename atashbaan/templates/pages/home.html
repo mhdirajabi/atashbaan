@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load static compress %}
+
+{% block content %}
+    <header class="jumbotron jumbotron-fluid py-5">
+        <div class="container-fluid text-center text-light"> 
+            <h1 class="display-3">آتش بان</h1>
+            <p class="lead pb-4">کتابخانه نرم افزاری تشخیص آتش</p>
+            <p><a href="{% url 'about' %}" class="btn btn-primary btn-lg" role="button" id="jmb-button">بیشتر بدانید</a></p>
+        </div>
+    </header>
+    <section id="services" class="container">
+        <h2 class="display-4 text-center mt-5 mb-3">خدمات ما</h2>
+        <div class="row text-center">
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img class="card-img-top" src="{% static 'images/Card_1.jpg' %}" alt="تصویر کارت اول">
+                    <div class="card-body">
+                        <h4 class="card-title">تشخیص آتش به صورت نرم افزاری</h4>
+                        <p class="card-text">تشخیص آتش به صورت نرم افزاری</p>
+                    </div>
+                    <div class="card-footer py-4">
+                        <a href="{% url 'account_login' %}" class="btn btn-secondary" id="card-btn">بیشتر بدانید &raquo;</a>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img class="card-img-top" src="{% static 'images/Card_2.jpg' %}" alt="تصویر کارت دوم">
+                    <div class="card-body">
+                        <h4 class="card-title">استفاده از هوش مصنوعی</h4>
+                        <p class="card-text">استفاده از هوش مصنوعی</p>
+                    </div>
+                    <div class="card-footer py-4">
+                        <a href="{% url 'account_login' %}" class="btn btn-secondary" id="card-btn">بیشتر بدانید &raquo;</a>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img class="card-img-top" src="{% static 'images/Card_3.jpg' %}" alt="تصویر کارت سوم">
+                    <div class="card-body">
+                        <h4 class="card-title">نوشته شده با ++C و OpenCV</h4>
+                        <p class="card-text">نوشته شده با ++C و OpenCV</p>
+                    </div>
+                    <div class="card-footer py-4">
+                        <a href="{% url 'account_login' %}" class="btn btn-secondary" id="card-btn">بیشتر بدانید &raquo;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="container-fluid text-center text-light py-4 mt-4" id="contact">
+        <h2 class="display-4 pb-4 my-4">با ما در تماس باشید !</h2>
+        <p class="lead pb-3">جهت دریافت مشاوره و خرید انواع نرم‌افزارهای بر پایه هوش مصنوعی با ما تماس حاصل فرمائید.</p>
+        <a href="mailto:support@shahaab-co.com" class="btn btn-primary btn-lg mb-4" role="button" id="contact-button">تماس با ما</a>
+    </section>
+{% endblock content %}

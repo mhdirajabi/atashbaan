@@ -1,0 +1,24 @@
+{% extends "account/base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block head_title %}
+    بارگذاری تصویر
+{% endblock head_title %}
+
+{% block inner %}
+    <div class="row justify-content-md-center">
+        <h1 class="text-center">بارگذاری تصویر</h1>
+    </div>
+    <div class="row justify-content-md-center mt-3">
+        <div class="col-md-auto">
+          <form enctype='multipart/form-data' method="post">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <div class="mb-3">
+              <button class="btn btn-primary w-100" type="submit">بارگذاری</button>
+            </div>
+          </form>
+        </div>
+    </div>
+{% endblock inner %}

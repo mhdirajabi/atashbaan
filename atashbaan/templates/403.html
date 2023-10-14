@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}اجازه دسترسی ندارید{% endblock title %}
+
+{% block content %}
+  <div class="container my-5">
+    <div class="row justify-content-md-center">
+      <h1 class="text-center">۴۰۳: شما اجازه دسترسی به این صفحه را نداردید.</h1>
+    </div>
+    <div class="row justify-content-md-center mt-3">
+      <p class="text-center">
+        {% if exception %}
+          {{ exception }}
+        {% else %}
+          شما اجازه دسترسی به این صفحه را نداردید.
+        {% endif %}
+      </p>
+    </div>
+  </div>
+{% endblock content %}

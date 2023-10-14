@@ -1,0 +1,92 @@
+/* These styles are generated from project.scss. */
+@font-face {
+  font-family: "Sahel";
+  src: url("../fonts/Sahel.eot");
+  src:
+    local("Sahel"),
+    url("../fonts/Sahel.woff") format("woff"),
+    url("../fonts/Sahel.ttf") format("truetype");
+}
+
+html * {
+  font-family: "Sahel";
+}
+
+html, body {
+  height: 100%;
+}
+
+.alert-debug {
+  color: black;
+  background-color: white;
+  border-color: #d6e9c6;
+}
+
+.alert-error {
+  color: #b94a48;
+  background-color: #f2dede;
+  border-color: #eed3d7;
+}
+
+.bi {
+  vertical-align: -.125em;
+  fill: currentColor;
+}
+
+.btn-bd-primary {
+  --bd-violet-bg: #712cf9;
+  --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+
+  --bs-btn-font-weight: 600;
+  --bs-btn-color: var(--bs-white);
+  --bs-btn-bg: var(--bd-violet-bg);
+  --bs-btn-border-color: var(--bd-violet-bg);
+  --bs-btn-hover-color: var(--bs-white);
+  --bs-btn-hover-bg: #6528e0;
+  --bs-btn-hover-border-color: #6528e0;
+  --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+  --bs-btn-active-color: var(--bs-btn-hover-color);
+  --bs-btn-active-bg: #5a23c8;
+  --bs-btn-active-border-color: #5a23c8;
+}
+
+.bd-mode-toggle {
+  z-index: 1500;
+}
+
+.bd-mode-toggle .dropdown-menu .active .bi {
+  display: block !important;
+}
+
+#wrapper {
+  min-height: 100%;
+  position: relative;
+}
+
+#footer {
+  /* background-color: #e9e9e9; */
+  width: 100%;
+  position: absolute;
+}
+
+#footer-link {
+  color: #c60063;
+  text-decoration: none;
+}
+
+#footer-link:hover {
+  color: #000ac6;
+}
+
+#about-us {
+  color: #c60063;
+}
+
+#about-us-link {
+  color: #c60063;
+  text-decoration: none;
+}
+
+#about-us-link:hover {
+  color: #000ac6;
+}
