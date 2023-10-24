@@ -7,8 +7,15 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.core.files.base import ContentFile
 from django.core.paginator import InvalidPage
 from django.db.models.query import QuerySet
-from django.http import Http404, HttpRequest, HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.http import (
+    Http404,
+    HttpRequest,
+    HttpResponse,
+    HttpResponseForbidden,
+    HttpResponseNotFound,
+    HttpResponseRedirect,
+)
+from django.shortcuts import redirect, render
 from django.urls import reverse, reverse_lazy
 from django.utils.translation import gettext as _
 from django.views.generic import CreateView, DeleteView, DetailView, ListView
@@ -56,17 +63,28 @@ class ImageProcessView(LoginRequiredMixin, ContextMixin, View):
         qd_image_pk = self.request.GET.get("image-pk")
 
         if qd_image_pk:
-            img = Image.unprocessed.get(pk=qd_image_pk)
+            try:
+                img = Image.unprocessed.get(pk=qd_image_pk)
+            except Image.DoesNotExist:
+                return HttpResponseNotFound(render(request, "404.html"))
         else:
-            img = Image.unprocessed.filter(user=context["user"]).latest("created_at")
+            try:
+                img = Image.unprocessed.filter(user=context["user"]).latest(
+                    "created_at"
+                )
+            except Image.DoesNotExist:
+                return HttpResponseNotFound(render(request, "404.html"))
 
-        img_fp = img.image.path
+        if img.user == self.request.user:
+            img_fp = img.image.path
 
-        image = fire_recognizer(img_fp)
+            image = fire_recognizer(img_fp)
 
-        context["form"].fields["image"].initial = image
+            context["form"].fields["image"].initial = image
 
-        return render(request, self.template_name, context)
+            return render(request, self.template_name, context)
+        else:
+            return HttpResponseForbidden(render(request, "403.html"))
 
     def post(self, request, *args, **kwargs):
         user = self.request.user
@@ -74,12 +92,18 @@ class ImageProcessView(LoginRequiredMixin, ContextMixin, View):
         qd_image_pk = self.request.GET.get("image-pk")
 
         if qd_image_pk:
-            usr_image = user.images.get(pk=qd_image_pk)
+            try:
+                usr_image = user.images.get(pk=qd_image_pk)
+            except Image.DoesNotExist:
+                return HttpResponseNotFound(render(request, "404.html"))
         else:
-            usr_image = user.images.latest("created_at")
+            try:
+                usr_image = user.images.latest("created_at")
+            except Image.DoesNotExist:
+                return HttpResponseNotFound(render(request, "404.html"))
 
+        # file naming
         usr_image_name = usr_image.image.name
-
         full_file_name = usr_image_name.split("/")[-1]
         file_name = full_file_name.split(".")[0]
         ext = usr_image_name.split(".", 1)[1]

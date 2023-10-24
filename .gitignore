@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-### Python template
-=======
->>>>>>> 5ca0f31e9f8c1e8ff4c93bd21ee28321e2672141
+### Python template  
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -24,17 +21,13 @@ parts/
 sdist/
 var/
 wheels/
-<<<<<<< HEAD
 *.egg-info/
 .installed.cfg
 *.egg
-=======
 share/python-wheels/
 *.egg-info/
 .installed.cfg
 *.egg
-MANIFEST
->>>>>>> 5ca0f31e9f8c1e8ff4c93bd21ee28321e2672141
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
@@ -49,33 +42,25 @@ pip-delete-this-directory.txt
 # Unit test / coverage reports
 htmlcov/
 .tox/
-<<<<<<< HEAD
-=======
 .nox/
->>>>>>> 5ca0f31e9f8c1e8ff4c93bd21ee28321e2672141
 .coverage
 .coverage.*
 .cache
 nosetests.xml
 coverage.xml
 *.cover
-<<<<<<< HEAD
 .hypothesis/
-=======
 *.py,cover
 .hypothesis/
 .pytest_cache/
 cover/
->>>>>>> 5ca0f31e9f8c1e8ff4c93bd21ee28321e2672141
 
 # Translations
 *.mo
 *.pot
 
 # Django stuff:
-<<<<<<< HEAD
 staticfiles/
-=======
 *.log
 local_settings.py
 db.sqlite3
@@ -87,25 +72,20 @@ instance/
 
 # Scrapy stuff:
 .scrapy
->>>>>>> 5ca0f31e9f8c1e8ff4c93bd21ee28321e2672141
 
 # Sphinx documentation
 docs/_build/
 
 # PyBuilder
-<<<<<<< HEAD
 target/
 
 # pyenv
 .python-version
 
-
-
 # Environments
 .venv
 venv/
 ENV/
-=======
 .pybuilder/
 target/
 
@@ -126,18 +106,18 @@ ipython_config.py
 #   However, in case of collaboration, if having platform-specific dependencies or dependencies
 #   having no cross-platform support, pipenv may install dependencies that don't work, or not
 #   install all needed dependencies.
-#Pipfile.lock
+# Pipfile.lock
 
 # poetry
 #   Similar to Pipfile.lock, it is generally recommended to include poetry.lock in version control.
 #   This is especially recommended for binary packages to ensure reproducibility, and is more
 #   commonly ignored for libraries.
 #   https://python-poetry.org/docs/basic-usage/#commit-your-poetrylock-file-to-version-control
-#poetry.lock
+# poetry.lock
 
 # pdm
 #   Similar to Pipfile.lock, it is generally recommended to include pdm.lock in version control.
-#pdm.lock
+# pdm.lock
 #   pdm stores project-wide configurations in .pdm.toml, but it is recommended to not include it
 #   in version control.
 #   https://pdm.fming.dev/#use-with-ide
@@ -165,7 +145,6 @@ venv.bak/
 # Spyder project settings
 .spyderproject
 .spyproject
->>>>>>> 5ca0f31e9f8c1e8ff4c93bd21ee28321e2672141
 
 # Rope project settings
 .ropeproject
@@ -175,8 +154,6 @@ venv.bak/
 
 # mypy
 .mypy_cache/
-<<<<<<< HEAD
-
 
 ### Node template
 # Logs
@@ -248,7 +225,6 @@ typings/
 # .nfs files are created when an open file is removed but is still being accessed
 .nfs*
 
-
 ### VisualStudioCode template
 .vscode/*
 !.vscode/settings.json
@@ -259,9 +235,6 @@ typings/
 
 # Local History for Visual Studio Code
 .history/
-
-
-
 
 
 ### Windows template
@@ -394,4 +367,3 @@ cython_debug/
 #  and can be added to the global gitignore or merged into this file.  For a more nuclear
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
->>>>>>> 5ca0f31e9f8c1e8ff4c93bd21ee28321e2672141
